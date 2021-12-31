@@ -1,0 +1,4 @@
+<resources>
+    <dimen name="button_margin">8dp</dimen>
+    <dimen name="slider_margin">8dp</dimen>
+</resources>

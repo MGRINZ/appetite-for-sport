@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center" >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/your_tmr"
+        android:textAlignment="center"
+        android:textSize="24sp"/>
+
+    <TextView
+        android:id="@+id/kcal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/kcal_unit"
+        android:textAlignment="center"
+        android:textSize="32sp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginTop="40dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="@string/protein" />
+
+        <TextView
+            android:id="@+id/protein"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:layout_alignParentEnd="true"
+            android:text="@string/g_unit" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginTop="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="@string/fat" />
+
+        <TextView
+            android:id="@+id/fat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:layout_alignParentEnd="true"
+            android:text="@string/g_unit" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginTop="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="@string/carbohydrate" />
+
+        <TextView
+            android:id="@+id/carbohydrate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:layout_alignParentEnd="true"
+            android:text="@string/g_unit" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/prepare_diet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/prepare_diet" />
+</LinearLayout>

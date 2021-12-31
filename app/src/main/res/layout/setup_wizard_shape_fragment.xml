@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:gravity="center" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="@dimen/slider_margin">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/weight"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.google.android.material.slider.Slider
+                android:id="@+id/weight_slider"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:stepSize="1"
+                android:valueFrom="40"
+                android:valueTo="150"
+                tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
+
+            <EditText
+                android:id="@+id/weight_input"
+                android:layout_width="64dp"
+                android:layout_height="48dp"
+                android:importantForAutofill="no"
+                android:inputType="numberSigned"
+                android:text="0"
+                android:textAlignment="center"
+                tools:ignore="HardcodedText,LabelFor,DuplicateSpeakableTextCheck" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="@dimen/slider_margin">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/height" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.google.android.material.slider.Slider
+                android:id="@+id/height_slider"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:stepSize="1"
+                android:valueFrom="100"
+                android:valueTo="250"
+                tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
+
+            <EditText
+                android:id="@+id/height_input"
+                android:layout_width="64dp"
+                android:layout_height="48dp"
+                android:importantForAutofill="no"
+                android:inputType="numberSigned"
+                android:text="0"
+                android:textAlignment="center"
+                tools:ignore="HardcodedText,LabelFor" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="@dimen/slider_margin">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/age" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.google.android.material.slider.Slider
+                android:id="@+id/age_slider"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:stepSize="1"
+                android:valueFrom="16"
+                android:valueTo="100"
+                tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
+
+            <EditText
+                android:id="@+id/age_input"
+                android:layout_width="64dp"
+                android:layout_height="48dp"
+                android:importantForAutofill="no"
+                android:inputType="numberSigned"
+                android:text="0"
+                android:textAlignment="center"
+                tools:ignore="HardcodedText,LabelFor" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="@dimen/slider_margin">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/training_intensity" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.google.android.material.slider.Slider
+                android:id="@+id/intensity_slider"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:tickVisible="false"
+                android:stepSize="0.1"
+                android:valueFrom="0"
+                android:valueTo="10"
+                tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
+
+            <EditText
+                android:id="@+id/intensity_input"
+                android:layout_width="64dp"
+                android:layout_height="48dp"
+                android:importantForAutofill="no"
+                android:inputType="numberSigned"
+                android:text="0"
+                android:textAlignment="center"
+                tools:ignore="HardcodedText,LabelFor" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/next_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/calculate_tmr" />
+
+</LinearLayout>

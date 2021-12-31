@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Apetyt na sport</string>
+    <string name="action_settings">Settings</string>
+    <string name="weight">Waga</string>
+    <string name="height">Wzrost</string>
+    <string name="age">Wiek</string>
+    <string name="next">Dalej</string>
+    <string name="calculate_tmr">Oblicz zapotrzebowanie</string>
+    <string name="training_intensity">Intensywność ćwiczeń</string>
+    <string name="your_tmr">Twoje zapotrzebowanie</string>
+    <string name="kcal_unit">%1$d kcal</string>
+    <string name="protein">Białko</string>
+    <string name="g_unit">%1$d g</string>
+    <string name="fat">Tłuszcze</string>
+    <string name="carbohydrate">Węglowodany</string>
+    <string name="prepare_diet">Wyznacz dietę</string>
+</resources>
