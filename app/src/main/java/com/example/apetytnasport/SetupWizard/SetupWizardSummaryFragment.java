@@ -38,36 +38,51 @@ public class SetupWizardSummaryFragment extends SetupWizardFragment {
 
         SetupWizardActivity activity = getSetupWizardActivity();
 
-        kcal.setText(getResources().getString(R.string.kcal_unit, calculateTmr(activity.getSport(),
+        double kcalValue = calculateTdee(
+                activity.getSport(),
+                activity.getTrainings(),
+                activity.getTrainingTime(),
                 activity.getGender(),
                 activity.getWeight(),
                 activity.getHeight(),
                 activity.getAge(),
-                activity.getIntensity())));
+                activity.getShape()
+        );
+
+        double proteinValue = Math.round((kcalValue * 0.125 / 4) * 100) / 100.0;
+        double fatValue = Math.round((kcalValue * 0.225 / 9) * 100) / 100.0;
+        double carbohydratesValue = Math.round((kcalValue * 0.65 / 4) * 100) / 100.0;
+
+        kcal.setText(getResources().getString(R.string.kcal_unit, (int) kcalValue));
+        protein.setText(getResources().getString(R.string.g_unit, proteinValue));
+        fat.setText(getResources().getString(R.string.g_unit, fatValue));
+        carbohydrates.setText(getResources().getString(R.string.g_unit, carbohydratesValue));
     }
 
-    private int calculateTmr(int sport, int gender, int weight, int height, int age, float intensity) {
-        double bmr = 0;
+    private double calculateTdee(int sport, int trainings, int trainingTime, int gender, int weight, int height, int age, double shape) {
+        double tdee = 0;
+
+        double bmr = (9.99 * weight) + (6.25 * height) - (4.92 * age)
 
         if(gender == SetupWizardGenderFragment.GENDER_FEMALE)
-            bmr = 655 + 9.6 * weight + 1.8 * height - 4.7 * age;
+            bmr -= 161
         else if(gender == SetupWizardGenderFragment.GENDER_MALE)
-            bmr = 66.4 + 13.7 * weight + 6.0 * height - 6.8 * age;
+            bmr += 5
 
-        double tmr = (bmr + sportKcal(sport) * weight) * intensityMult(intensity);
-
-        return (int) tmr;
+        double epoc = 0.07 * bmr
+        double tea = trainings * trainingTime * sportKcal(sport) + trainings * EPOC / 7
+        double neat = shape * 700 + 200
+        double tef = 0.1 * (bmr + tea + neat)
+        double tdee = bmr + tea + neat + tef
+        return tdee;
     }
 
     private float sportKcal(int sportIndex) {
-        TypedArray kcal = getResources().obtainTypedArray(R.array.sport_kcal);
-        float value = kcal.getFloat(sportIndex, 0);
-        kcal.recycle();
+        // TypedArray kcal = getResources().obtainTypedArray(R.array.sport_kcal);
+        // float value = kcal.getFloat(sportIndex, 0);
+        // kcal.recycle();
+        float value = 1.23;
         return value;
-    }
-
-    private double intensityMult(float normalizedIntensity) {
-        return (normalizedIntensity / 10) + 1.40;
     }
 }
 

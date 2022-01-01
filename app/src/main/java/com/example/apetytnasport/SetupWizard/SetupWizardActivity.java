@@ -21,10 +21,13 @@ public class SetupWizardActivity extends AppCompatActivity {
     private ViewPager2 viewPager;
     private int gender;
     private int sport;
+    private int trainings;
+    private int trainingTime;
     private int weight;
     private int height;
     private int age;
     private float intensity;
+    private float shape;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +76,22 @@ public class SetupWizardActivity extends AppCompatActivity {
         return sport;
     }
 
+    public void setTrainings(int trainings) {
+        this.trainings = trainings;
+    }
+
+    public int getTrainings() {
+        return trainings;
+    }
+
+    public void setTrainingTime(int trainingTime) {
+        this.trainingTime = trainingTime;
+    }
+
+    public int getTrainingTime() {
+        return trainingTime;
+    }
+
     public int getWeight() {
         return weight;
     }
@@ -103,6 +122,14 @@ public class SetupWizardActivity extends AppCompatActivity {
 
     public void setIntensity(float intensity) {
         this.intensity = intensity;
+    }
+
+    public float getShape() {
+        return shape;
+    }
+
+    public void setShape(float shape) {
+        this.shape = shape;
     }
 
     private class SetupWizardAdapter extends FragmentStateAdapter {
