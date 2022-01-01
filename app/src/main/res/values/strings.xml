@@ -14,4 +14,8 @@
     <string name="fat">Tłuszcze</string>
     <string name="carbohydrate">Węglowodany</string>
     <string name="prepare_diet">Wyznacz dietę</string>
+    <string name="shape">Budowa ciała</string>
+    <string name="endomorphic">Endomorfik</string>
+    <string name="ectomorphic">Ektomorfik</string>
+    <string name="mezomorphic">Mezomorfik</string>
 </resources>

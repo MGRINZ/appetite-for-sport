@@ -70,7 +70,7 @@ public class SetupWizardSportsFragment extends SetupWizardFragment {
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    getSetupWizardActivity().setSport(position);
+                    getSetupWizardActivity().setSport(holder.getAdapterPosition());
                     getSetupWizardActivity().nextPage();
                 }
             });

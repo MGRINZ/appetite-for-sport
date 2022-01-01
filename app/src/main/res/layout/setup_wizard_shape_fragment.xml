@@ -31,6 +31,7 @@
                 android:stepSize="1"
                 android:valueFrom="40"
                 android:valueTo="150"
+                app:tickVisible="false"
                 tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
 
             <EditText
@@ -68,6 +69,7 @@
                 android:stepSize="1"
                 android:valueFrom="100"
                 android:valueTo="250"
+                app:tickVisible="false"
                 tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
 
             <EditText
@@ -105,6 +107,7 @@
                 android:stepSize="1"
                 android:valueFrom="16"
                 android:valueTo="100"
+                app:tickVisible="false"
                 tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
 
             <EditText
@@ -117,6 +120,56 @@
                 android:textAlignment="center"
                 tools:ignore="HardcodedText,LabelFor" />
         </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="@dimen/slider_margin">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/shape" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/endomorphic"
+                android:layout_alignParentStart="true"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/mezomorphic"
+                android:layout_centerInParent="true"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ectomorphic"
+                android:layout_alignParentEnd="true"/>
+
+        </RelativeLayout>
+
+        <com.google.android.material.slider.Slider
+            android:id="@+id/shape_slider"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stepSize="0.1"
+            android:valueFrom="0"
+            android:valueTo="1"
+            android:value="0.5"
+            app:tickVisible="false"
+            app:labelBehavior="gone"
+            tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
+
     </LinearLayout>
 
     <LinearLayout
