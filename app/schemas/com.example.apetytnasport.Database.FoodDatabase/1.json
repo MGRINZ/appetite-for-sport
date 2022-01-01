@@ -1,0 +1,186 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "1f6efa6faf54b06cc92329593a2a40cc",
+    "entities": [
+      {
+        "tableName": "FoodItem",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `name` TEXT, `image` TEXT, `servingSizeValue` REAL NOT NULL, `servingSizeUnit` TEXT, `nutritionFactsId` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "image",
+            "columnName": "image",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "servingSizeValue",
+            "columnName": "servingSizeValue",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "servingSizeUnit",
+            "columnName": "servingSizeUnit",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "nutritionFactsId",
+            "columnName": "nutritionFactsId",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "NutritionFacts",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `calories` REAL NOT NULL, `carbohydrate` REAL NOT NULL, `protein` REAL NOT NULL, `fat` REAL NOT NULL, `saturatedFat` REAL NOT NULL, `polyunsaturatedFat` REAL NOT NULL, `monounsaturatedFat` REAL NOT NULL, `transFat` REAL NOT NULL, `cholesterol` REAL NOT NULL, `sodium` REAL NOT NULL, `potassium` REAL NOT NULL, `fiber` REAL NOT NULL, `sugar` REAL NOT NULL, `vitaminA` REAL NOT NULL, `vitaminC` REAL NOT NULL, `calcium` REAL NOT NULL, `iron` REAL NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "calories",
+            "columnName": "calories",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "carbohydrate",
+            "columnName": "carbohydrate",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "protein",
+            "columnName": "protein",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "fat",
+            "columnName": "fat",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "saturatedFat",
+            "columnName": "saturatedFat",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "polyunsaturatedFat",
+            "columnName": "polyunsaturatedFat",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "monounsaturatedFat",
+            "columnName": "monounsaturatedFat",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "transFat",
+            "columnName": "transFat",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "cholesterol",
+            "columnName": "cholesterol",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "sodium",
+            "columnName": "sodium",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "potassium",
+            "columnName": "potassium",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "fiber",
+            "columnName": "fiber",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "sugar",
+            "columnName": "sugar",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "vitaminA",
+            "columnName": "vitaminA",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "vitaminC",
+            "columnName": "vitaminC",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "calcium",
+            "columnName": "calcium",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "iron",
+            "columnName": "iron",
+            "affinity": "REAL",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '1f6efa6faf54b06cc92329593a2a40cc')"
+    ]
+  }
+}
