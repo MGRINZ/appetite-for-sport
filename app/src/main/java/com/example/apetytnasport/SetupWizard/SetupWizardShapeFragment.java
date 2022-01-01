@@ -32,6 +32,7 @@ public class SetupWizardShapeFragment extends SetupWizardFragment {
         Slider heightSlider = viewGroup.findViewById(R.id.height_slider);
         Slider ageSlider = viewGroup.findViewById(R.id.age_slider);
         Slider intensitySlider = viewGroup.findViewById(R.id.intensity_slider);
+        Slider shapeSlider = viewGroup.findViewById(R.id.shape_slider);
         EditText weightInput = viewGroup.findViewById(R.id.weight_input);
         EditText heightInput = viewGroup.findViewById(R.id.height_input);
         EditText ageInput = viewGroup.findViewById(R.id.age_input);
@@ -60,6 +61,7 @@ public class SetupWizardShapeFragment extends SetupWizardFragment {
                 getSetupWizardActivity().setHeight((int) heightSlider.getValue());
                 getSetupWizardActivity().setAge((int) ageSlider.getValue());
                 getSetupWizardActivity().setIntensity(intensitySlider.getValue());
+                getSetupWizardActivity().setShape(shapeSlider.getValue());
                 getSetupWizardActivity().nextPage();
             }
         });

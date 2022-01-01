@@ -2,6 +2,7 @@ package com.example.apetytnasport.SetupWizard;
 
 import android.content.res.TypedArray;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,8 +41,8 @@ public class SetupWizardSummaryFragment extends SetupWizardFragment {
 
         double kcalValue = calculateTdee(
                 activity.getSport(),
-                activity.getTrainings(),
-                activity.getTrainingTime(),
+                1, //activity.getTrainings(),
+                60, //activity.getTrainingTime(),
                 activity.getGender(),
                 activity.getWeight(),
                 activity.getHeight(),
@@ -51,29 +52,29 @@ public class SetupWizardSummaryFragment extends SetupWizardFragment {
 
         double proteinValue = Math.round((kcalValue * 0.125 / 4) * 100) / 100.0;
         double fatValue = Math.round((kcalValue * 0.225 / 9) * 100) / 100.0;
-        double carbohydratesValue = Math.round((kcalValue * 0.65 / 4) * 100) / 100.0;
+        double carbohydrateValue = Math.round((kcalValue * 0.65 / 4) * 100) / 100.0;
 
         kcal.setText(getResources().getString(R.string.kcal_unit, (int) kcalValue));
         protein.setText(getResources().getString(R.string.g_unit, proteinValue));
         fat.setText(getResources().getString(R.string.g_unit, fatValue));
-        carbohydrates.setText(getResources().getString(R.string.g_unit, carbohydratesValue));
+        carbohydrate.setText(getResources().getString(R.string.g_unit, carbohydrateValue));
     }
 
     private double calculateTdee(int sport, int trainings, int trainingTime, int gender, int weight, int height, int age, double shape) {
         double tdee = 0;
 
-        double bmr = (9.99 * weight) + (6.25 * height) - (4.92 * age)
+        double bmr = (9.99 * weight) + (6.25 * height) - (4.92 * age);
 
         if(gender == SetupWizardGenderFragment.GENDER_FEMALE)
-            bmr -= 161
+            bmr -= 161;
         else if(gender == SetupWizardGenderFragment.GENDER_MALE)
-            bmr += 5
+            bmr += 5;
 
-        double epoc = 0.07 * bmr
-        double tea = trainings * trainingTime * sportKcal(sport) + trainings * EPOC / 7
-        double neat = shape * 700 + 200
-        double tef = 0.1 * (bmr + tea + neat)
-        double tdee = bmr + tea + neat + tef
+        double epoc = 0.07 * bmr;
+        double tea = trainings * trainingTime * sportKcal(sport) + trainings * epoc / 7;
+        double neat = shape * 700 + 200;
+        double tef = 0.1 * (bmr + tea + neat);
+        tdee = bmr + tea + neat + tef;
         return tdee;
     }
 
@@ -81,7 +82,7 @@ public class SetupWizardSummaryFragment extends SetupWizardFragment {
         // TypedArray kcal = getResources().obtainTypedArray(R.array.sport_kcal);
         // float value = kcal.getFloat(sportIndex, 0);
         // kcal.recycle();
-        float value = 1.23;
+        float value = (float)1.23;
         return value;
     }
 }
