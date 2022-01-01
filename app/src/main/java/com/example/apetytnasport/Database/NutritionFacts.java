@@ -1,5 +1,7 @@
 package com.example.apetytnasport.Database;
 
+import androidx.annotation.Nullable;
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -9,21 +11,21 @@ public class NutritionFacts {
     @PrimaryKey
     public int id;
 
-    public double calories;
-    public double carbohydrate;
-    public double protein;
-    public double fat;
-    public double saturatedFat;
-    public double polyunsaturatedFat;
-    public double monounsaturatedFat;
-    public double transFat;
-    public double cholesterol;
-    public double sodium;
-    public double potassium;
-    public double fiber;
-    public double sugar;
-    public double vitaminA;
-    public double vitaminC;
-    public double calcium;
-    public double iron;
+    public Double calories;
+    public Double carbohydrate;
+    public Double protein;
+    public Double fat;
+    public Double saturatedFat;
+    public Double polyunsaturatedFat;
+    public Double monounsaturatedFat;
+    public Double transFat;
+    public Double cholesterol;
+    public Double sodium;
+    public Double potassium;
+    public Double fiber;
+    public Double sugar;
+    public Double vitaminA;
+    public Double vitaminC;
+    public Double calcium;
+    public Double iron;
 }

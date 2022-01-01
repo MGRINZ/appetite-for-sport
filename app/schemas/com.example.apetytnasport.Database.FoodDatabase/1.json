@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "1f6efa6faf54b06cc92329593a2a40cc",
+    "identityHash": "cb197ab5c85fb7102535cfe29f9429c9",
     "entities": [
       {
         "tableName": "FoodItem",
@@ -56,7 +56,7 @@
       },
       {
         "tableName": "NutritionFacts",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `calories` REAL NOT NULL, `carbohydrate` REAL NOT NULL, `protein` REAL NOT NULL, `fat` REAL NOT NULL, `saturatedFat` REAL NOT NULL, `polyunsaturatedFat` REAL NOT NULL, `monounsaturatedFat` REAL NOT NULL, `transFat` REAL NOT NULL, `cholesterol` REAL NOT NULL, `sodium` REAL NOT NULL, `potassium` REAL NOT NULL, `fiber` REAL NOT NULL, `sugar` REAL NOT NULL, `vitaminA` REAL NOT NULL, `vitaminC` REAL NOT NULL, `calcium` REAL NOT NULL, `iron` REAL NOT NULL, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `calories` REAL, `carbohydrate` REAL, `protein` REAL, `fat` REAL, `saturatedFat` REAL, `polyunsaturatedFat` REAL, `monounsaturatedFat` REAL, `transFat` REAL, `cholesterol` REAL, `sodium` REAL, `potassium` REAL, `fiber` REAL, `sugar` REAL, `vitaminA` REAL, `vitaminC` REAL, `calcium` REAL, `iron` REAL, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "id",
@@ -68,103 +68,103 @@
             "fieldPath": "calories",
             "columnName": "calories",
             "affinity": "REAL",
-            "notNull": true
+            "notNull": false
           },
           {
             "fieldPath": "carbohydrate",
             "columnName": "carbohydrate",
             "affinity": "REAL",
-            "notNull": true
+            "notNull": false
           },
           {
             "fieldPath": "protein",
             "columnName": "protein",
             "affinity": "REAL",
-            "notNull": true
+            "notNull": false
           },
           {
             "fieldPath": "fat",
             "columnName": "fat",
             "affinity": "REAL",
-            "notNull": true
+            "notNull": false
           },
           {
             "fieldPath": "saturatedFat",
             "columnName": "saturatedFat",
             "affinity": "REAL",
-            "notNull": true
+            "notNull": false
           },
           {
             "fieldPath": "polyunsaturatedFat",
             "columnName": "polyunsaturatedFat",
             "affinity": "REAL",
-            "notNull": true
+            "notNull": false
           },
           {
             "fieldPath": "monounsaturatedFat",
             "columnName": "monounsaturatedFat",
             "affinity": "REAL",
-            "notNull": true
+            "notNull": false
           },
           {
             "fieldPath": "transFat",
             "columnName": "transFat",
             "affinity": "REAL",
-            "notNull": true
+            "notNull": false
           },
           {
             "fieldPath": "cholesterol",
             "columnName": "cholesterol",
             "affinity": "REAL",
-            "notNull": true
+            "notNull": false
           },
           {
             "fieldPath": "sodium",
             "columnName": "sodium",
             "affinity": "REAL",
-            "notNull": true
+            "notNull": false
           },
           {
             "fieldPath": "potassium",
             "columnName": "potassium",
             "affinity": "REAL",
-            "notNull": true
+            "notNull": false
           },
           {
             "fieldPath": "fiber",
             "columnName": "fiber",
             "affinity": "REAL",
-            "notNull": true
+            "notNull": false
           },
           {
             "fieldPath": "sugar",
             "columnName": "sugar",
             "affinity": "REAL",
-            "notNull": true
+            "notNull": false
           },
           {
             "fieldPath": "vitaminA",
             "columnName": "vitaminA",
             "affinity": "REAL",
-            "notNull": true
+            "notNull": false
           },
           {
             "fieldPath": "vitaminC",
             "columnName": "vitaminC",
             "affinity": "REAL",
-            "notNull": true
+            "notNull": false
           },
           {
             "fieldPath": "calcium",
             "columnName": "calcium",
             "affinity": "REAL",
-            "notNull": true
+            "notNull": false
           },
           {
             "fieldPath": "iron",
             "columnName": "iron",
             "affinity": "REAL",
-            "notNull": true
+            "notNull": false
           }
         ],
         "primaryKey": {
@@ -180,7 +180,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '1f6efa6faf54b06cc92329593a2a40cc')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'cb197ab5c85fb7102535cfe29f9429c9')"
     ]
   }
 }

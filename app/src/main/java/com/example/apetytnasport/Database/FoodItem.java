@@ -2,6 +2,7 @@ package com.example.apetytnasport.Database;
 
 import android.content.Context;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
