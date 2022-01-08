@@ -6,7 +6,7 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-@Database(entities = {FoodItem.class, NutritionFacts.class}, version = 1)
+@Database(entities = {FoodItem.class, NutritionFacts.class, Sport.class, Recommendations.class}, version = 1)
 public abstract class FoodDatabase extends RoomDatabase {
 
     private static FoodDatabase instance;
@@ -15,6 +15,7 @@ public abstract class FoodDatabase extends RoomDatabase {
         if(instance == null) {
             instance = Room.databaseBuilder(context, FoodDatabase.class, "food.db")
                     .createFromAsset("food.db")
+                    .allowMainThreadQueries()
                     .build();
         }
         return instance;

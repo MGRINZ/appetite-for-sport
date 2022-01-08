@@ -18,4 +18,10 @@
     <string name="endomorphic">Endomorfik</string>
     <string name="ectomorphic">Ektomorfik</string>
     <string name="mezomorphic">Mezomorfik</string>
+    <string name="select_sport">Wybierz dyscyplinę sportu</string>
+    <string name="select_gender">Wybierz płeć</string>
+    <string name="describe_shape">Opisz budowę ciała</string>
+    <string name="describe_training">Opisz dzienny trening</string>
+    <string name="trainings">Ilość treningów</string>
+    <string name="trainingTime">Czas treningu (min)</string>
 </resources>

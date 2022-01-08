@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         style="@style/Header"
-        android:text="@string/describe_shape"/>
+        android:text="@string/describe_training"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,7 +22,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/weight"/>
+            android:text="@string/trainings"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -30,18 +30,19 @@
             android:orientation="horizontal">
 
             <com.google.android.material.slider.Slider
-                android:id="@+id/weight_slider"
+                android:id="@+id/trainings_slider"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:stepSize="1"
-                android:valueFrom="40"
-                android:valueTo="150"
+                android:valueFrom="0"
+                android:valueTo="10"
+                android:value="1"
                 app:tickVisible="false"
                 tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
 
             <EditText
-                android:id="@+id/weight_input"
+                android:id="@+id/trainings_input"
                 android:layout_width="64dp"
                 android:layout_height="48dp"
                 android:importantForAutofill="no"
@@ -60,7 +61,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/height" />
+            android:text="@string/trainingTime" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -68,18 +69,19 @@
             android:orientation="horizontal">
 
             <com.google.android.material.slider.Slider
-                android:id="@+id/height_slider"
+                android:id="@+id/trainingTime_slider"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:stepSize="1"
-                android:valueFrom="100"
-                android:valueTo="250"
+                android:valueFrom="0"
+                android:valueTo="300"
+                android:value="60"
                 app:tickVisible="false"
                 tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
 
             <EditText
-                android:id="@+id/height_input"
+                android:id="@+id/trainingTime_input"
                 android:layout_width="64dp"
                 android:layout_height="48dp"
                 android:importantForAutofill="no"
@@ -98,7 +100,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/age" />
+            android:text="@string/training_intensity" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -106,18 +108,18 @@
             android:orientation="horizontal">
 
             <com.google.android.material.slider.Slider
-                android:id="@+id/age_slider"
+                android:id="@+id/intensity_slider"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:stepSize="1"
-                android:valueFrom="16"
-                android:valueTo="100"
                 app:tickVisible="false"
+                android:stepSize="0.1"
+                android:valueFrom="0"
+                android:valueTo="10"
                 tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
 
             <EditText
-                android:id="@+id/age_input"
+                android:id="@+id/intensity_input"
                 android:layout_width="64dp"
                 android:layout_height="48dp"
                 android:importantForAutofill="no"
@@ -126,62 +128,12 @@
                 android:textAlignment="center"
                 tools:ignore="HardcodedText,LabelFor" />
         </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_margin="@dimen/slider_margin">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/shape" />
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="8dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/endomorphic"
-                android:layout_alignParentStart="true"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/mezomorphic"
-                android:layout_centerInParent="true"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/ectomorphic"
-                android:layout_alignParentEnd="true"/>
-
-        </RelativeLayout>
-
-        <com.google.android.material.slider.Slider
-            android:id="@+id/shape_slider"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:stepSize="0.1"
-            android:valueFrom="0"
-            android:valueTo="1"
-            android:value="0.5"
-            app:tickVisible="false"
-            app:labelBehavior="gone"
-            tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
-
     </LinearLayout>
 
     <Button
         android:id="@+id/next_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/next" />
+        android:text="@string/calculate_tmr" />
 
 </LinearLayout>

@@ -1,29 +1,32 @@
-package com.example.apetytnasport;
+package com.example.apetytnasport.Database;
+
+import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
 
 import com.example.apetytnasport.SetupWizard.SetupWizardGenderFragment;
 
-public class SportDiscipline {
-    private final String name;
-    private final double proteinPct;
-    private final double fatPct;
-    private final double carbohydratePct;
-    private final double minKcal;
-    private final double maxKcal;
+@Entity(tableName = "Sports")
+public class Sport {
 
+    @PrimaryKey
+    public int id;
+
+    @NonNull
+    public String name;
+    public double proteinPct;
+    public double fatPct;
+    public double carbohydratePct;
+    public double minKcal;
+    public double maxKcal;
+
+    @ColumnInfo(defaultValue = "0")
+    public int groupId;
+
+    @Ignore
     private double tdee;
-
-    public SportDiscipline(String name, double proteinPct, double fatPct, double carbohydratePct, double minKcal, double maxKcal) {
-        this.name = name;
-        this.proteinPct = proteinPct;
-        this.fatPct = fatPct;
-        this.carbohydratePct = carbohydratePct;
-        this.minKcal = minKcal;
-        this.maxKcal = maxKcal;
-    }
-
-    public SportDiscipline(String name, double minKcal, double maxKcal) {
-        this(name, 0.125, 0.225, 0.65, minKcal, maxKcal);
-    }
 
     public String getName() {
         return name;

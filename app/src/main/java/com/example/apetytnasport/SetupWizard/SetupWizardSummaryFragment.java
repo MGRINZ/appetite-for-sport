@@ -1,8 +1,6 @@
 package com.example.apetytnasport.SetupWizard;
 
-import android.content.res.TypedArray;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.apetytnasport.R;
-import com.example.apetytnasport.SportDiscipline;
+import com.example.apetytnasport.Database.Sport;
 
 public class SetupWizardSummaryFragment extends SetupWizardFragment {
 
@@ -40,17 +38,17 @@ public class SetupWizardSummaryFragment extends SetupWizardFragment {
 
         SetupWizardActivity activity = getSetupWizardActivity();
 
-        SportDiscipline sportDiscipline = new SportDiscipline("", 0.62, 1.23);
+        Sport sportDiscipline = activity.getSport();
 
         double kcalValue = sportDiscipline.calculateTdee(
-                1,
-                60,
+                activity.getTrainings(),
+                activity.getTrainingTime(),
                 activity.getGender(),
                 activity.getWeight(),
                 activity.getHeight(),
                 activity.getAge(),
                 activity.getShape(),
-                1.0
+                activity.getIntensity()
         );
 
         double proteinValue = Math.round((kcalValue * 0.125 / 4) * 100) / 100.0;

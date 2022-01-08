@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "cb197ab5c85fb7102535cfe29f9429c9",
+    "identityHash": "d6b5bca9f397fcd05c0359bac77c8471",
     "entities": [
       {
         "tableName": "FoodItem",
@@ -175,12 +175,102 @@
         },
         "indices": [],
         "foreignKeys": []
+      },
+      {
+        "tableName": "Sports",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `name` TEXT NOT NULL, `proteinPct` REAL NOT NULL, `fatPct` REAL NOT NULL, `carbohydratePct` REAL NOT NULL, `minKcal` REAL NOT NULL, `maxKcal` REAL NOT NULL, `groupId` INTEGER NOT NULL DEFAULT 0, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "proteinPct",
+            "columnName": "proteinPct",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "fatPct",
+            "columnName": "fatPct",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "carbohydratePct",
+            "columnName": "carbohydratePct",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "minKcal",
+            "columnName": "minKcal",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "maxKcal",
+            "columnName": "maxKcal",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "groupId",
+            "columnName": "groupId",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "0"
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "Recommendations",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`groupId` INTEGER NOT NULL, `foodId` INTEGER NOT NULL, PRIMARY KEY(`groupId`, `foodId`))",
+        "fields": [
+          {
+            "fieldPath": "groupId",
+            "columnName": "groupId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "foodId",
+            "columnName": "foodId",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "groupId",
+            "foodId"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'cb197ab5c85fb7102535cfe29f9429c9')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'd6b5bca9f397fcd05c0359bac77c8471')"
     ]
   }
 }

@@ -31,23 +31,19 @@ public class SetupWizardShapeFragment extends SetupWizardFragment {
         Slider weightSlider = viewGroup.findViewById(R.id.weight_slider);
         Slider heightSlider = viewGroup.findViewById(R.id.height_slider);
         Slider ageSlider = viewGroup.findViewById(R.id.age_slider);
-        Slider intensitySlider = viewGroup.findViewById(R.id.intensity_slider);
         Slider shapeSlider = viewGroup.findViewById(R.id.shape_slider);
         EditText weightInput = viewGroup.findViewById(R.id.weight_input);
         EditText heightInput = viewGroup.findViewById(R.id.height_input);
         EditText ageInput = viewGroup.findViewById(R.id.age_input);
-        EditText intensityInput = viewGroup.findViewById(R.id.intensity_input);
         Button nextButton = viewGroup.findViewById(R.id.next_button);
 
         weightSlider.addOnChangeListener(new OnShapeSliderChangeListener(weightInput));
         heightSlider.addOnChangeListener(new OnShapeSliderChangeListener(heightInput));
         ageSlider.addOnChangeListener(new OnShapeSliderChangeListener(ageInput));
-        intensitySlider.addOnChangeListener(new OnShapeSliderChangeListener(intensityInput, true));
 
         weightInput.setText(String.valueOf((int) weightSlider.getValueFrom()));
         heightInput.setText(String.valueOf((int) heightSlider.getValueFrom()));
         ageInput.setText(String.valueOf((int) ageSlider.getValueFrom()));
-        intensityInput.setText(String.valueOf((int) intensitySlider.getValueFrom()));
 
         weightInput.addTextChangedListener(new ShapeTextWatcher(weightSlider));
         //
@@ -60,7 +56,6 @@ public class SetupWizardShapeFragment extends SetupWizardFragment {
                 getSetupWizardActivity().setWeight((int) weightSlider.getValue());
                 getSetupWizardActivity().setHeight((int) heightSlider.getValue());
                 getSetupWizardActivity().setAge((int) ageSlider.getValue());
-                getSetupWizardActivity().setIntensity(intensitySlider.getValue());
                 getSetupWizardActivity().setShape(shapeSlider.getValue());
                 getSetupWizardActivity().nextPage();
             }

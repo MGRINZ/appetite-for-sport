@@ -13,14 +13,15 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.example.apetytnasport.Database.Sport;
 import com.example.apetytnasport.R;
 
 public class SetupWizardActivity extends AppCompatActivity {
 
-    private final int NUM_PAGES = 4;
+    private final int NUM_PAGES = 5;
     private ViewPager2 viewPager;
     private int gender;
-    private int sport;
+    private Sport sport;
     private int trainings;
     private int trainingTime;
     private int weight;
@@ -68,11 +69,11 @@ public class SetupWizardActivity extends AppCompatActivity {
         return gender;
     }
 
-    public void setSport(int sportIndex) {
-        this.sport = sportIndex;
+    public void setSport(Sport sport) {
+        this.sport = sport;
     }
 
-    public int getSport() {
+    public Sport getSport() {
         return sport;
     }
 
@@ -149,6 +150,8 @@ public class SetupWizardActivity extends AppCompatActivity {
                 case 2:
                     return new SetupWizardShapeFragment(SetupWizardActivity.this);
                 case 3:
+                    return new SetupWizardTrainingsFragment(SetupWizardActivity.this);
+                case 4:
                     return new SetupWizardSummaryFragment(SetupWizardActivity.this);
             }
             return null;

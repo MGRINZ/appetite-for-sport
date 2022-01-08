@@ -12,4 +12,7 @@ public interface FoodDao {
 
     @Query("SELECT * FROM NutritionFacts WHERE id = :id")
     public NutritionFacts getNutritionFacts(int id);
+
+    @Query("SELECT * FROM Sports ORDER BY id")
+    public List<Sport> getSports();
 }
