@@ -25,4 +25,8 @@
     <string name="trainings">Ilość treningów</string>
     <string name="trainingTime">Czas treningu (min)</string>
     <string name="computing_diet">Wyznaczanie diety</string>
+    <string name="product">Produkt</string>
+    <string name="protein_short">B</string>
+    <string name="carbohydrate_short">W</string>
+    <string name="fat_short">T</string>
 </resources>

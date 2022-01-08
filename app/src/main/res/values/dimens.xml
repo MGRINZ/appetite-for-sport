@@ -1,4 +1,7 @@
 <resources>
     <dimen name="button_margin">8dp</dimen>
     <dimen name="slider_margin">8dp</dimen>
+    <dimen name="diet_list_nutrition_facts_width">192dp</dimen>
+    <dimen name="diet_list_padding">8dp</dimen>
+    <dimen name="diet_list_nutrition_facts_margin">4dp</dimen>
 </resources>
