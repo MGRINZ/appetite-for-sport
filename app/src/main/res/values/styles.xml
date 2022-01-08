@@ -3,5 +3,6 @@
     <style name="Header">
         <item name="android:textSize">24sp</item>
         <item name="android:layout_gravity">center</item>
+        <item name="android:textAlignment">center</item>
     </style>
 </resources>

@@ -24,4 +24,5 @@
     <string name="describe_training">Opisz dzienny trening</string>
     <string name="trainings">Ilość treningów</string>
     <string name="trainingTime">Czas treningu (min)</string>
+    <string name="computing_diet">Wyznaczanie diety</string>
 </resources>

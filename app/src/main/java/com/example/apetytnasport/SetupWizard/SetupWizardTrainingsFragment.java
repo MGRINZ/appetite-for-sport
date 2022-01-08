@@ -32,6 +32,9 @@ public class SetupWizardTrainingsFragment extends SetupWizardFragment {
         EditText intensityInput = viewGroup.findViewById(R.id.intensity_input);
         Button nextButton = viewGroup.findViewById(R.id.next_button);
 
+        if(!getSetupWizardActivity().getSport().hasVariableKcal())
+            viewGroup.findViewById(R.id.intensity_layout).setVisibility(View.GONE);
+
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

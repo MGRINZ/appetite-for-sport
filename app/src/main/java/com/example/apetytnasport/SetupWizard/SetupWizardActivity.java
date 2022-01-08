@@ -14,9 +14,10 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.apetytnasport.Database.Sport;
+import com.example.apetytnasport.NoStatusBarActivity;
 import com.example.apetytnasport.R;
 
-public class SetupWizardActivity extends AppCompatActivity {
+public class SetupWizardActivity extends NoStatusBarActivity {
 
     private final int NUM_PAGES = 5;
     private ViewPager2 viewPager;
@@ -34,12 +35,6 @@ public class SetupWizardActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setup_wizard);
-
-        // Transparent status bar
-        Window window = getWindow();
-        window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        window.setStatusBarColor(Color.TRANSPARENT);
 
         viewPager = findViewById(R.id.setup_wizard_pager);
         viewPager.setAdapter(new SetupWizardAdapter(this));

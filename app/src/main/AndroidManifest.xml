@@ -10,9 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ApetytNaSport">
         <activity
+            android:name=".Algorithm.AlgorithmActivity"
+            android:exported="false"
+            android:theme="@style/Theme.ApetytNaSport.NoActionBar" />
+        <activity
             android:name=".SetupWizard.SetupWizardActivity"
-            android:label="@string/app_name"
             android:exported="true"
+            android:label="@string/app_name"
             android:theme="@style/Theme.ApetytNaSport.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,8 +24,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".MainActivity" />
+        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>

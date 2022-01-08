@@ -1,20 +1,33 @@
 package com.example.apetytnasport.SetupWizard;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.example.apetytnasport.Algorithm.AlgorithmActivity;
 import com.example.apetytnasport.R;
 import com.example.apetytnasport.Database.Sport;
 
 public class SetupWizardSummaryFragment extends SetupWizardFragment {
 
-    private ViewGroup viewGroup;
+    private TextView kcalView;
+    private TextView proteinView;
+    private TextView fatView;
+    private TextView carbohydrateView;
+
+    private double kcalVal;
+    private double proteinVal;
+    private double fatVal;
+    private double carbohydrateVal;
+
+    private SetupWizardActivity activity;
 
     public SetupWizardSummaryFragment(SetupWizardActivity activity) {
         super(activity);
@@ -23,7 +36,29 @@ public class SetupWizardSummaryFragment extends SetupWizardFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        viewGroup = (ViewGroup) inflater.inflate(R.layout.setup_wizard_summary_fragment, container, false);
+        ViewGroup viewGroup = (ViewGroup) inflater.inflate(R.layout.setup_wizard_summary_fragment, container, false);
+
+        this.kcalView = viewGroup.findViewById(R.id.kcal);
+        this.proteinView = viewGroup.findViewById(R.id.protein);
+        this.fatView = viewGroup.findViewById(R.id.fat);
+        this.carbohydrateView = viewGroup.findViewById(R.id.carbohydrate);
+
+        Button prepareDietButton = viewGroup.findViewById(R.id.prepare_diet);
+        prepareDietButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(activity, AlgorithmActivity.class);
+                intent.putExtra("sportId", activity.getSport().id);
+                intent.putExtra("protein", proteinVal);
+                intent.putExtra("fat", fatVal);
+                intent.putExtra("carbohydrate", carbohydrateVal);
+
+                activity.startActivity(intent);
+            }
+        });
+
+        this.activity = getSetupWizardActivity();
+
         return viewGroup;
     }
 
@@ -31,16 +66,9 @@ public class SetupWizardSummaryFragment extends SetupWizardFragment {
     public void onResume() {
         super.onResume();
 
-        TextView kcal = viewGroup.findViewById(R.id.kcal);
-        TextView protein = viewGroup.findViewById(R.id.protein);
-        TextView fat = viewGroup.findViewById(R.id.fat);
-        TextView carbohydrate = viewGroup.findViewById(R.id.carbohydrate);
-
-        SetupWizardActivity activity = getSetupWizardActivity();
-
         Sport sportDiscipline = activity.getSport();
 
-        double kcalValue = sportDiscipline.calculateTdee(
+        this.kcalVal = sportDiscipline.calculateTdee(
                 activity.getTrainings(),
                 activity.getTrainingTime(),
                 activity.getGender(),
@@ -51,14 +79,14 @@ public class SetupWizardSummaryFragment extends SetupWizardFragment {
                 activity.getIntensity()
         );
 
-        double proteinValue = Math.round((kcalValue * 0.125 / 4) * 100) / 100.0;
-        double fatValue = Math.round((kcalValue * 0.225 / 9) * 100) / 100.0;
-        double carbohydrateValue = Math.round((kcalValue * 0.65 / 4) * 100) / 100.0;
+        this.proteinVal = sportDiscipline.getProteinValue();
+        this.fatVal = sportDiscipline.getFatValue();
+        this.carbohydrateVal = sportDiscipline.getCarbohydrateValue();
 
-        kcal.setText(getResources().getString(R.string.kcal_unit, (int) kcalValue));
-        protein.setText(getResources().getString(R.string.g_unit, sportDiscipline.getProteinValue()));
-        fat.setText(getResources().getString(R.string.g_unit, sportDiscipline.getFatValue()));
-        carbohydrate.setText(getResources().getString(R.string.g_unit, sportDiscipline.getCarbohydrateValue()));
+        this.kcalView.setText(getResources().getString(R.string.kcal_unit, (int) this.kcalVal));
+        this.proteinView.setText(getResources().getString(R.string.g_unit, this.proteinVal));
+        this.fatView.setText(getResources().getString(R.string.g_unit, this.fatVal));
+        this.carbohydrateView.setText(getResources().getString(R.string.g_unit, this.carbohydrateVal));
     }
 }
 

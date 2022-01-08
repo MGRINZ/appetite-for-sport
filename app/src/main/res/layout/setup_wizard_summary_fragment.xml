@@ -9,8 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/your_tmr"
-        android:textAlignment="center"
-        android:textSize="24sp"/>
+        style="@style/Header" />
 
     <TextView
         android:id="@+id/kcal"

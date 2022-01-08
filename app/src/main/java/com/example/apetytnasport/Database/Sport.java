@@ -67,9 +67,13 @@ public class Sport {
     }
 
     private double getKcal(double intensity) {
-        if(minKcal == maxKcal)
+        if(!this.hasVariableKcal())
             return minKcal;
 
         return (maxKcal - minKcal) * intensity + minKcal;
+    }
+
+    public boolean hasVariableKcal() {
+        return minKcal != maxKcal;
     }
 }
