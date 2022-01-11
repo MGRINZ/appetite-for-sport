@@ -52,6 +52,7 @@ public class AlgorithmActivity extends NoStatusBarActivity {
 
                 Intent intent = new Intent(AlgorithmActivity.this, MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("dietLists", algorithm.getResults());
                 startActivity(intent);
             }
         });

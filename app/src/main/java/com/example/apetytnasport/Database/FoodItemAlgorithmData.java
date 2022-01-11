@@ -1,9 +1,78 @@
 package com.example.apetytnasport.Database;
 
-public class FoodItemAlgorithmData {
+import android.os.Parcel;
+import android.os.Parcelable;
 
+public class FoodItemAlgorithmData implements Parcelable {
+
+    public String name;
     public double servingSizeValue;
     public Double carbohydrate;
     public Double protein;
     public Double fat;
+
+    public FoodItemAlgorithmData() {
+
+    }
+
+    protected FoodItemAlgorithmData(Parcel in) {
+        name = in.readString();
+        servingSizeValue = in.readDouble();
+        if (in.readByte() == 0) {
+            carbohydrate = null;
+        } else {
+            carbohydrate = in.readDouble();
+        }
+        if (in.readByte() == 0) {
+            protein = null;
+        } else {
+            protein = in.readDouble();
+        }
+        if (in.readByte() == 0) {
+            fat = null;
+        } else {
+            fat = in.readDouble();
+        }
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(name);
+        dest.writeDouble(servingSizeValue);
+        if (carbohydrate == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeDouble(carbohydrate);
+        }
+        if (protein == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeDouble(protein);
+        }
+        if (fat == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeDouble(fat);
+        }
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<FoodItemAlgorithmData> CREATOR = new Creator<FoodItemAlgorithmData>() {
+        @Override
+        public FoodItemAlgorithmData createFromParcel(Parcel in) {
+            return new FoodItemAlgorithmData(in);
+        }
+
+        @Override
+        public FoodItemAlgorithmData[] newArray(int size) {
+            return new FoodItemAlgorithmData[size];
+        }
+    };
 }

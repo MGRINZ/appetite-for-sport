@@ -18,6 +18,7 @@ public class FoodItem {
     public double servingSizeValue;
     public String servingSizeUnit;
     public int nutritionFactsId;
+    public Integer substituteGroup;
 
     @Ignore
     private NutritionFacts nutritionFacts;

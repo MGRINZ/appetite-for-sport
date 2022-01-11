@@ -1,5 +1,6 @@
 package com.example.apetytnasport.SetupWizard;
 
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -49,15 +51,10 @@ public class SetupWizardSportsFragment extends SetupWizardFragment {
     private class SportsAdapter extends RecyclerView.Adapter<SportsAdapter.SportsViewHolder> {
 
         private final List<Sport> sports;
-        private final List<Drawable> sportDrawables = new ArrayList<Drawable>();
 
         public SportsAdapter() {
             FoodDao dao = FoodDatabase.getInstance(getContext()).foodDao();
             sports = dao.getSports();
-//            TypedArray sportDrawablesTypedArray = getResources().obtainTypedArray(R.array.sport_drawables);
-//            for(int i = 0; i < sportDrawablesTypedArray.length(); i++)
-//                sportDrawables.add(sportDrawablesTypedArray.getDrawable(i));
-//            sportDrawablesTypedArray.recycle();
         }
 
         @NonNull
@@ -72,7 +69,12 @@ public class SetupWizardSportsFragment extends SetupWizardFragment {
             ImageButton button = holder.getButton();
             TextView caption = holder.getCaption();
 
-//            button.setImageDrawable(sportDrawables.get(position));
+            Sport sport = sports.get(position);
+            if(sport.imageName != null) {
+                Drawable sportIcon = ResourcesCompat.getDrawable(getResources(), getResources().getIdentifier(sport.imageName, "drawable", getSetupWizardActivity().getPackageName()), null);
+                button.setImageDrawable(sportIcon);
+            }
+
             caption.setText(sports.get(position).name);
 
             button.setOnClickListener(new View.OnClickListener() {

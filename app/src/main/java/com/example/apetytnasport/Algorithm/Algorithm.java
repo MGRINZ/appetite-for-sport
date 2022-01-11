@@ -18,11 +18,13 @@ public abstract class Algorithm {
     protected double protein;
     protected double fat;
     protected double carbohydrate;
+    private final List<FoodItemAlgorithmData> foodItems;
 
     public Algorithm(List<FoodItemAlgorithmData> foodItems, double protein, double fat, double carbohydrate) {
         this.protein = protein;
         this.fat = fat;
         this.carbohydrate = carbohydrate;
+        this.foodItems = foodItems;
 
         loadData(foodItems);
     }
@@ -80,6 +82,18 @@ public abstract class Algorithm {
             System.out.println(fVal(f[2], ds) + "\t" + (f[2][f[2].length - 1] - fVal(f[2], ds)) / f[2][f[2].length - 1] * 100 + "%");
             System.out.println();
         }
+    }
+
+    public ArrayList<ArrayList<AlgorithmResult>> getResults() {
+        ArrayList<ArrayList<AlgorithmResult>> results = new ArrayList<>();
+
+        for (double[] x : allXes) {
+            ArrayList<AlgorithmResult> r = new ArrayList<AlgorithmResult>();
+            for(int i = 0; i < x.length; i++)
+                r.add(new AlgorithmResult(foodItems.get(i), x[i]));
+            results.add(r);
+        }
+        return results;
     }
 }
 

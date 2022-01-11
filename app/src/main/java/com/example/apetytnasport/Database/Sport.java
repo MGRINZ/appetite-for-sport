@@ -16,6 +16,7 @@ public class Sport {
 
     @NonNull
     public String name;
+    public String imageName;
     public double proteinPct;
     public double fatPct;
     public double carbohydratePct;
