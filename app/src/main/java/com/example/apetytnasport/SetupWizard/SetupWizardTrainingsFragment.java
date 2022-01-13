@@ -32,6 +32,14 @@ public class SetupWizardTrainingsFragment extends SetupWizardFragment {
         EditText intensityInput = viewGroup.findViewById(R.id.intensity_input);
         Button nextButton = viewGroup.findViewById(R.id.next_button);
 
+        trainingsSlider.addOnChangeListener(new OnSliderChangeListener(trainingsInput));
+        trainingTimeSlider.addOnChangeListener(new OnSliderChangeListener(trainingTimeInput));
+        intensitySlider.addOnChangeListener(new OnSliderChangeListener(intensityInput));
+
+        trainingsInput.setText(String.valueOf((int) trainingsSlider.getValue()));
+        trainingTimeInput.setText(String.valueOf((int) trainingTimeSlider.getValue()));
+        intensityInput.setText(String.valueOf((int) intensitySlider.getValue()));
+
         if(!getSetupWizardActivity().getSport().hasVariableKcal())
             viewGroup.findViewById(R.id.intensity_layout).setVisibility(View.GONE);
 

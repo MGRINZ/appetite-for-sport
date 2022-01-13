@@ -36,6 +36,7 @@
                 android:layout_weight="1"
                 android:stepSize="1"
                 android:valueFrom="40"
+                android:value="70"
                 android:valueTo="150"
                 app:tickVisible="false"
                 tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
@@ -74,6 +75,7 @@
                 android:layout_weight="1"
                 android:stepSize="1"
                 android:valueFrom="100"
+                android:value="180"
                 android:valueTo="250"
                 app:tickVisible="false"
                 tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />

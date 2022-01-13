@@ -3,7 +3,6 @@ package com.example.apetytnasport.SetupWizard;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +11,6 @@ import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 
 import com.example.apetytnasport.R;
 import com.google.android.material.slider.Slider;
@@ -37,12 +35,12 @@ public class SetupWizardShapeFragment extends SetupWizardFragment {
         EditText ageInput = viewGroup.findViewById(R.id.age_input);
         Button nextButton = viewGroup.findViewById(R.id.next_button);
 
-        weightSlider.addOnChangeListener(new OnShapeSliderChangeListener(weightInput));
-        heightSlider.addOnChangeListener(new OnShapeSliderChangeListener(heightInput));
-        ageSlider.addOnChangeListener(new OnShapeSliderChangeListener(ageInput));
+        weightSlider.addOnChangeListener(new OnSliderChangeListener(weightInput));
+        heightSlider.addOnChangeListener(new OnSliderChangeListener(heightInput));
+        ageSlider.addOnChangeListener(new OnSliderChangeListener(ageInput));
 
-        weightInput.setText(String.valueOf((int) weightSlider.getValueFrom()));
-        heightInput.setText(String.valueOf((int) heightSlider.getValueFrom()));
+        weightInput.setText(String.valueOf((int) weightSlider.getValue()));
+        heightInput.setText(String.valueOf((int) heightSlider.getValue()));
         ageInput.setText(String.valueOf((int) ageSlider.getValueFrom()));
 
         weightInput.addTextChangedListener(new ShapeTextWatcher(weightSlider));
@@ -62,30 +60,6 @@ public class SetupWizardShapeFragment extends SetupWizardFragment {
         });
 
         return viewGroup;
-    }
-
-    private class OnShapeSliderChangeListener implements Slider.OnChangeListener {
-        private final EditText editInput;
-        private final boolean useFloat;
-
-        public OnShapeSliderChangeListener(EditText editInput) {
-            this(editInput, false);
-        }
-
-        public OnShapeSliderChangeListener(EditText editInput, boolean useFloat) {
-            this.editInput = editInput;
-            this.useFloat = useFloat;
-        }
-
-        @Override
-        public void onValueChange(@NonNull Slider slider, float value, boolean fromUser) {
-            String valueString;
-            if(useFloat)
-                valueString = String.valueOf(value);
-            else
-                valueString = String.valueOf((int) value);
-            editInput.setText(valueString);
-        }
     }
 
     private class ShapeTextWatcher implements TextWatcher {
