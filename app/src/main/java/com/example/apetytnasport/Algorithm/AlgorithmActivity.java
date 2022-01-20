@@ -1,9 +1,9 @@
 package com.example.apetytnasport.Algorithm;
 
-import androidx.annotation.NonNull;
-
 import android.content.Intent;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 
 import com.example.apetytnasport.Database.FoodDao;
 import com.example.apetytnasport.Database.FoodDatabase;
@@ -50,7 +50,7 @@ public class AlgorithmActivity extends NoStatusBarActivity {
                 if(Thread.interrupted())
                     return;
 
-                ArrayList<ArrayList<AlgorithmResult>> algorithmResults = removeSubstitutes(algorithm.getResults(), foodItems);
+                ArrayList<ArrayList<AlgorithmResult>> algorithmResults = removeSubstitutes(algorithm.getResults());
 
                 Intent intent = new Intent(AlgorithmActivity.this, MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -61,30 +61,35 @@ public class AlgorithmActivity extends NoStatusBarActivity {
     }
 
     @NonNull
-    private ArrayList<ArrayList<AlgorithmResult>> removeSubstitutes(ArrayList<ArrayList<AlgorithmResult>> algorithmResults, List<FoodItemAlgorithmData> foodItems) {
+    private ArrayList<ArrayList<AlgorithmResult>> removeSubstitutes(ArrayList<ArrayList<AlgorithmResult>> algorithmResults) {
         ArrayList<ArrayList<AlgorithmResult>> newAlgorithmResults = new ArrayList<>();
 
         for(ArrayList<AlgorithmResult> productsList : algorithmResults) {
-            ArrayList<FoodItemAlgorithmData> newFoodItems = new ArrayList<>(foodItems);
+
+            ArrayList<FoodItemAlgorithmData> newFoodItems = new ArrayList<>();
+            for (AlgorithmResult algorithmResult : productsList)
+                newFoodItems.add(algorithmResult.getFoodItem());
+
             for(int i = 0; i < productsList.size(); i++) {
-                FoodItemAlgorithmData foodItem = productsList.get(i).getFoodItem();
+                AlgorithmResult result = productsList.get(i);
+                FoodItemAlgorithmData foodItem = result.getFoodItem();
+
+                if(foodItem.substituteGroup == null)
+                    continue;
+
                 for(int j = i + 1; j < productsList.size(); j++) {
-                    FoodItemAlgorithmData comparedFoodItem = productsList.get(j).getFoodItem();
+                    AlgorithmResult comparedResult = productsList.get(j);
+                    FoodItemAlgorithmData comparedFoodItem = comparedResult.getFoodItem();
 
-                    if(foodItem.substituteGroup == null)
+                    if(foodItem.substituteGroup != comparedFoodItem.substituteGroup)
                         continue;
 
-                    if(!newFoodItems.contains(comparedFoodItem))
-                        continue;
-
-                    if(foodItem.substituteGroup == comparedFoodItem.substituteGroup) {
-                        if(foodItem.servingSizeValue < comparedFoodItem.servingSizeValue) {
-                            newFoodItems.remove(foodItem);
-                            break;
-                        }
-                        else
-                            newFoodItems.remove(comparedFoodItem);
+                    if(result.getServingSize() < comparedResult.getServingSize()) {
+                        newFoodItems.remove(foodItem);
+                        break;
                     }
+                    else
+                        newFoodItems.remove(comparedFoodItem);
                 }
             }
 
@@ -94,6 +99,13 @@ public class AlgorithmActivity extends NoStatusBarActivity {
         }
 
         return newAlgorithmResults;
+    }
+
+    private double getAverageServingSize(ArrayList<AlgorithmResult> productsList) {
+        double sum = 0.0;
+        for(AlgorithmResult r : productsList)
+            sum += r.getServingSize();
+        return sum / productsList.size();
     }
 
     @Override
