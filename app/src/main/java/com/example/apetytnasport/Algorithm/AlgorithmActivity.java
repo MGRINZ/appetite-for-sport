@@ -55,9 +55,11 @@ public class AlgorithmActivity extends NoStatusBarActivity {
                 ArrayList<ArrayList<AlgorithmResult>> algorithmResults = removeSubstitutes(algorithm.getResults());
                 ArrayList<ArrayList<AlgorithmResult>> newAlgorithmResults;
 
-
                 try {
                     while(true) {
+                        if(Thread.interrupted())
+                            return;
+
                         newAlgorithmResults = removeBelowAverage(algorithmResults);
                         if(compareResults(algorithmResults, newAlgorithmResults))
                             break;
@@ -70,7 +72,7 @@ public class AlgorithmActivity extends NoStatusBarActivity {
                     startActivity(intent);
                 }
                 catch(Exception e) {
-                    Toast.makeText(getApplicationContext(), getResources().getString(R.string.prepare_diet_error), Toast.LENGTH_SHORT);
+                    Toast.makeText(getApplicationContext(), getResources().getString(R.string.prepare_diet_error), Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(getApplicationContext(), SetupWizardActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);

@@ -23,6 +23,7 @@ import com.example.apetytnasport.SetupWizard.SetupWizardActivity;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -79,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
             double carbohydrate = foodItem.carbohydrate / foodItem.servingSizeValue * result.getServingSize();
 
             holder.getName().setText(foodItem.name);
-            holder.getServingSize().setText(getResources().getString(R.string.g_unit, servingSize));
+            holder.getServingSize().setText(String.format(Locale.getDefault(), "%.2f %s", servingSize, foodItem.servingSizeUnit));
             holder.getProtein().setText(getResources().getString(R.string.g_unit, protein));
             holder.getFat().setText(getResources().getString(R.string.g_unit, fat));
             holder.getCarbohydrate().setText(getResources().getString(R.string.g_unit, carbohydrate));

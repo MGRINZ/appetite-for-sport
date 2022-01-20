@@ -7,6 +7,7 @@ public class FoodItemAlgorithmData implements Parcelable {
 
     public String name;
     public double servingSizeValue;
+    public String servingSizeUnit;
     public Double carbohydrate;
     public Double protein;
     public Double fat;
@@ -16,9 +17,11 @@ public class FoodItemAlgorithmData implements Parcelable {
 
     }
 
+
     protected FoodItemAlgorithmData(Parcel in) {
         name = in.readString();
         servingSizeValue = in.readDouble();
+        servingSizeUnit = in.readString();
         if (in.readByte() == 0) {
             carbohydrate = null;
         } else {
@@ -41,27 +44,11 @@ public class FoodItemAlgorithmData implements Parcelable {
         }
     }
 
-    public static final Creator<FoodItemAlgorithmData> CREATOR = new Creator<FoodItemAlgorithmData>() {
-        @Override
-        public FoodItemAlgorithmData createFromParcel(Parcel in) {
-            return new FoodItemAlgorithmData(in);
-        }
-
-        @Override
-        public FoodItemAlgorithmData[] newArray(int size) {
-            return new FoodItemAlgorithmData[size];
-        }
-    };
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(name);
         dest.writeDouble(servingSizeValue);
+        dest.writeString(servingSizeUnit);
         if (carbohydrate == null) {
             dest.writeByte((byte) 0);
         } else {
@@ -87,4 +74,21 @@ public class FoodItemAlgorithmData implements Parcelable {
             dest.writeInt(substituteGroup);
         }
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<FoodItemAlgorithmData> CREATOR = new Creator<FoodItemAlgorithmData>() {
+        @Override
+        public FoodItemAlgorithmData createFromParcel(Parcel in) {
+            return new FoodItemAlgorithmData(in);
+        }
+
+        @Override
+        public FoodItemAlgorithmData[] newArray(int size) {
+            return new FoodItemAlgorithmData[size];
+        }
+    };
 }
