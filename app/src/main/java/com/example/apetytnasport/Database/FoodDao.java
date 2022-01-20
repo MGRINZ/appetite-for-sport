@@ -1,5 +1,6 @@
 package com.example.apetytnasport.Database;
 
+
 import androidx.room.Dao;
 import androidx.room.Query;
 
@@ -19,11 +20,12 @@ public interface FoodDao {
     @Query("SELECT * FROM Sports WHERE id = :id")
     public Sport getSport(int id);
 
-    @Query("SELECT fi.name, fi.servingSizeValue, nf.carbohydrate, nf.protein, nf.fat FROM FoodItem AS fi " +
+    @Query("SELECT fi.name, fi.servingSizeValue, fi.substituteGroup, nf.carbohydrate, nf.protein, nf.fat FROM FoodItem AS fi " +
             "JOIN NutritionFacts AS nf ON nf.id = fi.id " +
             "JOIN Recommendations AS r ON fi.id = r.foodId " +
             "JOIN Sports AS s ON s.groupId = r.groupId " +
-            "WHERE s.id = :sport " +
+//            "WHERE s.id = :sport " +
+            "WHERE s.id = :sport OR r.groupId IS NULL " +
             "ORDER BY fi.name")
     public List<FoodItemAlgorithmData> getRecommendations(Sport sport);
 }

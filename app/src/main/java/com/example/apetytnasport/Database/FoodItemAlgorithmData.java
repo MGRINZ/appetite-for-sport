@@ -10,6 +10,7 @@ public class FoodItemAlgorithmData implements Parcelable {
     public Double carbohydrate;
     public Double protein;
     public Double fat;
+    public Integer substituteGroup;
 
     public FoodItemAlgorithmData() {
 
@@ -33,6 +34,28 @@ public class FoodItemAlgorithmData implements Parcelable {
         } else {
             fat = in.readDouble();
         }
+        if (in.readByte() == 0) {
+            substituteGroup = null;
+        } else {
+            substituteGroup = in.readInt();
+        }
+    }
+
+    public static final Creator<FoodItemAlgorithmData> CREATOR = new Creator<FoodItemAlgorithmData>() {
+        @Override
+        public FoodItemAlgorithmData createFromParcel(Parcel in) {
+            return new FoodItemAlgorithmData(in);
+        }
+
+        @Override
+        public FoodItemAlgorithmData[] newArray(int size) {
+            return new FoodItemAlgorithmData[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
     @Override
@@ -57,22 +80,11 @@ public class FoodItemAlgorithmData implements Parcelable {
             dest.writeByte((byte) 1);
             dest.writeDouble(fat);
         }
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    public static final Creator<FoodItemAlgorithmData> CREATOR = new Creator<FoodItemAlgorithmData>() {
-        @Override
-        public FoodItemAlgorithmData createFromParcel(Parcel in) {
-            return new FoodItemAlgorithmData(in);
+        if (substituteGroup == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(substituteGroup);
         }
-
-        @Override
-        public FoodItemAlgorithmData[] newArray(int size) {
-            return new FoodItemAlgorithmData[size];
-        }
-    };
+    }
 }
