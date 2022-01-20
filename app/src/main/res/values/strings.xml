@@ -29,4 +29,6 @@
     <string name="protein_short">B</string>
     <string name="carbohydrate_short">W</string>
     <string name="fat_short">T</string>
+    <string name="prepare_diet_error">Podczas wyznaczania diety wystąpił błąd</string>
+    <string name="new_diet">Wyznacz nową dietę</string>
 </resources>
