@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "0da16bb88550bc366cff23d0ae85e85e",
+    "identityHash": "d0c0f6221989b1c9d26aac8467105375",
     "entities": [
       {
         "tableName": "FoodItem",
@@ -277,12 +277,39 @@
         },
         "indices": [],
         "foreignKeys": []
+      },
+      {
+        "tableName": "Allergens",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`foodId` INTEGER NOT NULL, `allergenId` INTEGER NOT NULL, PRIMARY KEY(`foodId`, `allergenId`))",
+        "fields": [
+          {
+            "fieldPath": "foodId",
+            "columnName": "foodId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "allergenId",
+            "columnName": "allergenId",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "foodId",
+            "allergenId"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '0da16bb88550bc366cff23d0ae85e85e')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'd0c0f6221989b1c9d26aac8467105375')"
     ]
   }
 }

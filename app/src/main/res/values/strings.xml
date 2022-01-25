@@ -31,4 +31,27 @@
     <string name="fat_short">T</string>
     <string name="prepare_diet_error">Podczas wyznaczania diety wystąpił błąd</string>
     <string name="new_diet">Wyznacz nową dietę</string>
+    <string name="select_allergens_title">Wskaż alergeny lub produkty do wyłączenia z diety</string>
+    <string name="change_link"><u>Zmień</u></string>
+    <string name="allergens_selected">Wybrano %1$d alergenów i nawyków żywieniowych</string>
+    <string name="cancel">Anuluj</string>
+    <string name="save">Zapisz</string>
+    <string-array name="allergen_items">
+        <item>Mięso</item>
+        <item>Produkty zwierzęce</item>
+        <item>Zboża zawierające gluten</item>
+        <item>Skorupiaki</item>
+        <item>Jaja</item>
+        <item>Ryby</item>
+        <item>Orzeszki ziemne (arachidowe)</item>
+        <item>Pozostałe orzechy</item>
+        <item>Soja</item>
+        <item>Mleko (łącznie z laktozą)</item>
+        <item>Seler</item>
+        <item>Gorczyca</item>
+        <item>Nasiona sezamu</item>
+        <item>Dwutlenek siarki i siarczyny</item>
+        <item>Łubin</item>
+        <item>Mięczaki</item>
+    </string-array>
 </resources>

@@ -7,7 +7,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
-@Database(entities = {FoodItem.class, NutritionFacts.class, Sport.class, Recommendations.class}, version = 1)
+@Database(entities = {FoodItem.class, NutritionFacts.class, Sport.class, Recommendations.class, Allergens.class}, version = 1)
 @TypeConverters({SportConverter.class})
 public abstract class FoodDatabase extends RoomDatabase {
 
