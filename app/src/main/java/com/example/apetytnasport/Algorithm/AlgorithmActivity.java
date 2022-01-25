@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.util.Pair;
 
 import com.example.apetytnasport.Database.FoodDao;
 import com.example.apetytnasport.Database.FoodDatabase;
@@ -15,7 +16,9 @@ import com.example.apetytnasport.NoStatusBarActivity;
 import com.example.apetytnasport.R;
 import com.example.apetytnasport.SetupWizard.SetupWizardActivity;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -26,6 +29,7 @@ public class AlgorithmActivity extends NoStatusBarActivity {
     private double protein;
     private double fat;
     private double carbohydrate;
+    private int[] allergens;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,10 +41,15 @@ public class AlgorithmActivity extends NoStatusBarActivity {
         protein = intent.getDoubleExtra("protein", 0);
         fat = intent.getDoubleExtra("fat", 0);
         carbohydrate = intent.getDoubleExtra("carbohydrate", 0);
+        ArrayList<Integer> allergensList = intent.getIntegerArrayListExtra("allergens");
+
+        allergens = new int[allergensList.size()];
+        for(int i = 0; i < allergensList.size(); i++)
+            allergens[i] = allergensList.get(i) + 1;
 
         FoodDao dao = FoodDatabase.getInstance(this).foodDao();
         Sport sport = dao.getSport(sportId);
-        List<FoodItemAlgorithmData> foodItems = dao.getRecommendations(sport);
+        List<FoodItemAlgorithmData> foodItems = dao.getRecommendations(sport, allergens);
 
         executor = Executors.newSingleThreadExecutor();
         executor.submit(new Runnable() {
@@ -52,18 +61,29 @@ public class AlgorithmActivity extends NoStatusBarActivity {
                 if(Thread.interrupted())
                     return;
 
-                ArrayList<ArrayList<AlgorithmResult>> algorithmResults = removeSubstitutes(algorithm.getResults());
-                ArrayList<ArrayList<AlgorithmResult>> newAlgorithmResults;
+                Pair<ArrayList<ArrayList<AlgorithmResult>>, ArrayList<Double>> removeResults = removeSubstitutes(algorithm.getResults());
+                ArrayList<ArrayList<AlgorithmResult>> algorithmResults = removeResults.first;
+                ArrayList<ArrayList<AlgorithmResult>> newAlgorithmResults = removeResults.first;
+
+                ArrayList<Double> algorithmError = removeResults.second;
+                ArrayList<Double> newAlgorithmError = removeResults.second;
 
                 try {
                     while(true) {
                         if(Thread.interrupted())
                             return;
 
-                        newAlgorithmResults = removeBelowAverage(algorithmResults);
+                        removeResults = removeBelowAverage(algorithmResults);
+
+                        newAlgorithmError = removeResults.second;
+                        if(compareErrors(algorithmError, newAlgorithmError))
+                            break;
+
+                        newAlgorithmResults = removeResults.first;
                         if(compareResults(algorithmResults, newAlgorithmResults))
                             break;
                         algorithmResults = newAlgorithmResults;
+                        algorithmError = newAlgorithmError;
                     }
 
                     Intent intent = new Intent(AlgorithmActivity.this, MainActivity.class);
@@ -83,8 +103,9 @@ public class AlgorithmActivity extends NoStatusBarActivity {
     }
 
     @NonNull
-    private ArrayList<ArrayList<AlgorithmResult>> removeSubstitutes(ArrayList<ArrayList<AlgorithmResult>> algorithmResults) {
+    private Pair<ArrayList<ArrayList<AlgorithmResult>>, ArrayList<Double>>  removeSubstitutes(ArrayList<ArrayList<AlgorithmResult>> algorithmResults) {
         ArrayList<ArrayList<AlgorithmResult>> newAlgorithmResults = new ArrayList<>();
+        ArrayList<Double> error = null;
 
         for(ArrayList<AlgorithmResult> productsList : algorithmResults) {
 
@@ -118,18 +139,20 @@ public class AlgorithmActivity extends NoStatusBarActivity {
             Algorithm algorithm = new AlgorithmExact(newFoodItems, protein, fat, carbohydrate);
             algorithm.start();
             newAlgorithmResults.addAll(algorithm.getResults());
+            error = algorithm.getError();
         }
 
-        return newAlgorithmResults;
+        return new Pair<>(newAlgorithmResults, error);
     }
 
     @NonNull
-    private ArrayList<ArrayList<AlgorithmResult>> removeBelowAverage(ArrayList<ArrayList<AlgorithmResult>> algorithmResults) {
+    private Pair<ArrayList<ArrayList<AlgorithmResult>>, ArrayList<Double>> removeBelowAverage(ArrayList<ArrayList<AlgorithmResult>> algorithmResults) {
         ArrayList<ArrayList<AlgorithmResult>> newAlgorithmResults = new ArrayList<>();
+        ArrayList<Double> error = null;
 
         for(ArrayList<AlgorithmResult> productsList : algorithmResults) {
             double averageServingSize = getAverageServingSize(productsList);
-            double threshold = averageServingSize / 2;
+            double threshold = averageServingSize / 3;
 
             ArrayList<FoodItemAlgorithmData> newFoodItems = new ArrayList<>();
             for (AlgorithmResult algorithmResult : productsList) {
@@ -142,9 +165,10 @@ public class AlgorithmActivity extends NoStatusBarActivity {
             algorithm.printResults();
 
             newAlgorithmResults.addAll(algorithm.getResults());
+            error = algorithm.getError();
         }
 
-        return newAlgorithmResults;
+        return new Pair<>(newAlgorithmResults, error);
     }
 
     private double getAverageServingSize(ArrayList<AlgorithmResult> productsList) {
@@ -171,6 +195,25 @@ public class AlgorithmActivity extends NoStatusBarActivity {
         }
 
         return true;
+    }
+
+    /**
+     * Compares two Algorithm error lists checking if there have been an improvement in results
+     * @param prevAlgorithmError One of Algorithm error list
+     * @param newAlgorithmError Another of Algorithm error list
+     * @return true if results haven't been improved, false otherwise
+     * @throws Exception when Algorithm error lists have different dimensions
+     */
+    private boolean compareErrors(ArrayList<Double> prevAlgorithmError, ArrayList<Double> newAlgorithmError) throws Exception {
+        if(prevAlgorithmError.size() != newAlgorithmError.size())
+            throw new Exception("Algorithm errors have different dimensions");
+
+        for(int i = 0; i < prevAlgorithmError.size(); i++) {
+            if(Math.round(prevAlgorithmError.get(i)) < Math.round(newAlgorithmError.get(i)))
+                return true;
+        }
+
+        return false;
     }
 
     @Override

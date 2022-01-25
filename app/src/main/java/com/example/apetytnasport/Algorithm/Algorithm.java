@@ -56,6 +56,7 @@ public abstract class Algorithm {
 
     protected abstract double[] optimize(double[] a);
     protected abstract void loadData(List<FoodItemAlgorithmData> foodItems);
+    public abstract ArrayList<Double> getError();
 
     public void start() {
         double[][] f = globalF;

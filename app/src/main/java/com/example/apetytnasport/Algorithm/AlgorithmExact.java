@@ -8,6 +8,7 @@ import com.example.apetytnasport.Database.FoodItem;
 import com.example.apetytnasport.Database.FoodItemAlgorithmData;
 import com.example.apetytnasport.Database.Sport;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -59,6 +60,7 @@ public class AlgorithmExact extends Algorithm {
         double rhoend = 1.0e-6;
         int iprint = 1;
         int maxfun = 3500;
+//        int maxfun = 500;
 
         Calcfc calcfc = new Calcfc() {
             @Override
@@ -91,7 +93,7 @@ public class AlgorithmExact extends Algorithm {
             }
         };
         double[] x = new double[a.length / 3 - 1];
-        Arrays.fill(x, 1);
+        Arrays.fill(x, 1e-6);
         Cobyla.findMinimum(calcfc, x.length, x.length + 3, x, rhobeg, rhoend, iprint, maxfun);
         return x;
     }
@@ -122,6 +124,27 @@ public class AlgorithmExact extends Algorithm {
             System.out.println(carbohydrateResult + " g\t" + carbohydrateResultPct + "%");
             System.out.println();
         }
+    }
+
+    @Override
+    public ArrayList<Double> getError() {
+        ArrayList<Double> errors = new ArrayList<>();
+
+        for(double[] ds : allXes) {
+            double[] f0 = new double[xDim + 1];
+            double[] f1 = new double[xDim + 1];
+            double[] f2 = new double[xDim + 1];
+
+            for(int i = 0; i < xDim + 1; i++) {
+                f0[i] = globalF[0][i];
+                f1[i] = globalF[0][i + xDim + 1];
+                f2[i] = globalF[0][i + (xDim + 1) * 2];
+            }
+
+            errors.add(fVal(f0, ds) + fVal(f1, ds) + fVal(f2, ds));
+        }
+
+        return errors;
     }
 }
 

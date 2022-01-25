@@ -61,6 +61,7 @@ public class SetupWizardSummaryFragment extends SetupWizardFragment implements S
                 intent.putExtra("protein", proteinVal);
                 intent.putExtra("fat", fatVal);
                 intent.putExtra("carbohydrate", carbohydrateVal);
+                intent.putIntegerArrayListExtra("allergens", allergens);
 
                 activity.startActivity(intent);
             }
