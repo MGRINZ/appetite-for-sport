@@ -36,6 +36,8 @@
     <string name="allergens_selected">Wybrano %1$d alergenów i nawyków żywieniowych</string>
     <string name="cancel">Anuluj</string>
     <string name="save">Zapisz</string>
+    <string name="take_a_while">Proces ten może chwilę zająć</string>
+    <string name="extended_search_info">Rozszerzanie zakresu o dodatkowe produkty</string>
     <string-array name="allergen_items">
         <item>Mięso</item>
         <item>Produkty zwierzęce</item>

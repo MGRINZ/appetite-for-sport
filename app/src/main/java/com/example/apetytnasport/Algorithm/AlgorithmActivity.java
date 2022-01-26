@@ -2,6 +2,8 @@ package com.example.apetytnasport.Algorithm;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -16,9 +18,7 @@ import com.example.apetytnasport.NoStatusBarActivity;
 import com.example.apetytnasport.R;
 import com.example.apetytnasport.SetupWizard.SetupWizardActivity;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -30,6 +30,8 @@ public class AlgorithmActivity extends NoStatusBarActivity {
     private double fat;
     private double carbohydrate;
     private int[] allergens;
+
+    private TextView extendedSearchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,63 +45,100 @@ public class AlgorithmActivity extends NoStatusBarActivity {
         carbohydrate = intent.getDoubleExtra("carbohydrate", 0);
         ArrayList<Integer> allergensList = intent.getIntegerArrayListExtra("allergens");
 
+        extendedSearchView = findViewById(R.id.extended_search);
+
         allergens = new int[allergensList.size()];
         for(int i = 0; i < allergensList.size(); i++)
             allergens[i] = allergensList.get(i) + 1;
 
         FoodDao dao = FoodDatabase.getInstance(this).foodDao();
         Sport sport = dao.getSport(sportId);
-        List<FoodItemAlgorithmData> foodItems = dao.getRecommendations(sport, allergens);
 
         executor = Executors.newSingleThreadExecutor();
         executor.submit(new Runnable() {
             @Override
             public void run() {
-                Algorithm algorithm = new AlgorithmExact(foodItems, protein, fat, carbohydrate);
-                algorithm.start();
-
-                if(Thread.interrupted())
-                    return;
-
-                Pair<ArrayList<ArrayList<AlgorithmResult>>, ArrayList<Double>> removeResults = removeSubstitutes(algorithm.getResults());
-                ArrayList<ArrayList<AlgorithmResult>> algorithmResults = removeResults.first;
-                ArrayList<ArrayList<AlgorithmResult>> newAlgorithmResults = removeResults.first;
-
-                ArrayList<Double> algorithmError = removeResults.second;
-                ArrayList<Double> newAlgorithmError = removeResults.second;
-
                 try {
-                    while(true) {
-                        if(Thread.interrupted())
-                            return;
+                    List<FoodItemAlgorithmData> foodItems = dao.getRecommendations(sport, allergens);
 
-                        removeResults = removeBelowAverage(algorithmResults);
+                    Pair<ArrayList<ArrayList<AlgorithmResult>>, ArrayList<Double>> results = prepareDiet(foodItems);
+                    ArrayList<ArrayList<AlgorithmResult>> algorithmResults = results.first;
+                    ArrayList<Double> algorithmError = results.second;
 
-                        newAlgorithmError = removeResults.second;
-                        if(compareErrors(algorithmError, newAlgorithmError))
+                    for(double error : algorithmError) {
+                        if(Math.round(error) > 0) {
+
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    extendedSearchView.setVisibility(View.VISIBLE);
+                                }
+                            });
+
+                            foodItems = dao.getMoreThanRecommendations(sport, allergens);
+                            results = prepareDiet(foodItems);
                             break;
-
-                        newAlgorithmResults = removeResults.first;
-                        if(compareResults(algorithmResults, newAlgorithmResults))
-                            break;
-                        algorithmResults = newAlgorithmResults;
-                        algorithmError = newAlgorithmError;
+                        }
                     }
+
+                    if(!compareErrors(algorithmError, results.second))
+                        algorithmResults = results.first;
 
                     Intent intent = new Intent(AlgorithmActivity.this, MainActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    intent.putExtra("dietLists", newAlgorithmResults);
+                    intent.putExtra("dietLists", algorithmResults);
                     startActivity(intent);
                 }
+                catch (InterruptedException ignored) { }
                 catch(Exception e) {
                     Toast.makeText(getApplicationContext(), getResources().getString(R.string.prepare_diet_error), Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(getApplicationContext(), SetupWizardActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                 }
-
             }
         });
+    }
+
+    private Pair<ArrayList<ArrayList<AlgorithmResult>>, ArrayList<Double>> prepareDiet(List<FoodItemAlgorithmData> foodItems) throws Exception {
+        Algorithm algorithm = new AlgorithmExact(foodItems, protein, fat, carbohydrate);
+        algorithm.start();
+
+        if(Thread.interrupted())
+            throw new InterruptedException();
+
+        Pair<ArrayList<ArrayList<AlgorithmResult>>, ArrayList<Double>> removeResults = removeSubstitutes(algorithm.getResults());
+        ArrayList<ArrayList<AlgorithmResult>> algorithmResults = removeResults.first;
+        ArrayList<ArrayList<AlgorithmResult>> newAlgorithmResults = removeResults.first;
+
+        ArrayList<Double> algorithmError = removeResults.second;
+        ArrayList<Double> newAlgorithmError = removeResults.second;
+
+        while(true) {
+            if(Thread.interrupted())
+                throw new InterruptedException();
+
+            removeResults = removeBelowAverage(algorithmResults);
+
+            newAlgorithmError = removeResults.second;
+            if(compareErrors(algorithmError, newAlgorithmError))
+                break;
+
+            newAlgorithmResults = removeResults.first;
+
+            if(!resultsHaveMinSize(newAlgorithmResults)) {
+                newAlgorithmResults = algorithmResults;
+                newAlgorithmError = algorithmError;
+                break;
+            }
+
+            if(compareResults(algorithmResults, newAlgorithmResults))
+                break;
+            algorithmResults = newAlgorithmResults;
+            algorithmError = newAlgorithmError;
+        }
+
+        return new Pair<>(newAlgorithmResults, newAlgorithmError);
     }
 
     @NonNull
@@ -214,6 +253,14 @@ public class AlgorithmActivity extends NoStatusBarActivity {
         }
 
         return false;
+    }
+
+    private boolean resultsHaveMinSize(ArrayList<ArrayList<AlgorithmResult>> algorithmResults) {
+        for(ArrayList<AlgorithmResult> results : algorithmResults) {
+            if(results.size() < 10)
+                return false;
+        }
+        return true;
     }
 
     @Override

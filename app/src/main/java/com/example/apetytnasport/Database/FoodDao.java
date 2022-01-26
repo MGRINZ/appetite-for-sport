@@ -32,4 +32,17 @@ public interface FoodDao {
             "    )" +
             "ORDER BY fi.name")
     public List<FoodItemAlgorithmData> getRecommendations(Sport sport, int[] allergens);
+
+    @Query("SELECT r.groupId, fi.name, fi.servingSizeValue, fi.servingSizeUnit, fi.substituteGroup, nf.carbohydrate, nf.protein, nf.fat FROM FoodItem AS fi " +
+            "JOIN NutritionFacts AS nf ON nf.id = fi.id " +
+            "LEFT JOIN Recommendations AS r ON fi.id = r.foodId " +
+            "LEFT JOIN Sports AS s ON s.groupId = r.groupId " +
+//            "WHERE s.id = :sport " +
+            "WHERE (s.id = :sport OR r.groupId IS NULL) " +
+            "    AND fi.id NOT IN (" +
+            "        SELECT foodId FROM Allergens" +
+            "        WHERE allergenId IN (:allergens)" +
+            "    )" +
+            "ORDER BY fi.name")
+    public List<FoodItemAlgorithmData> getMoreThanRecommendations(Sport sport, int[] allergens);
 }
