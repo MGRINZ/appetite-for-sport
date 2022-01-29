@@ -44,9 +44,6 @@ public class SetupWizardShapeFragment extends SetupWizardFragment {
         ageInput.setText(String.valueOf((int) ageSlider.getValueFrom()));
 
         weightInput.addTextChangedListener(new ShapeTextWatcher(weightSlider));
-        //
-        // TODO: fix user input and add the rest of the watchers
-        //
 
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,8 +61,6 @@ public class SetupWizardShapeFragment extends SetupWizardFragment {
 
     private class ShapeTextWatcher implements TextWatcher {
         private final Slider slider;
-
-        // TODO: Add useFloat attribute
 
         public ShapeTextWatcher(Slider slider) {
             this.slider = slider;

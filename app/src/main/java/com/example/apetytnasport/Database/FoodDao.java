@@ -25,7 +25,6 @@ public interface FoodDao {
             "LEFT JOIN Recommendations AS r ON fi.id = r.foodId " +
             "LEFT JOIN Sports AS s ON s.groupId = r.groupId " +
             "WHERE s.id = :sport " +
-//            "WHERE (s.id = :sport OR r.groupId IS NULL) " +
             "    AND fi.id NOT IN (" +
             "        SELECT foodId FROM Allergens" +
             "        WHERE allergenId IN (:allergens)" +
@@ -37,7 +36,6 @@ public interface FoodDao {
             "JOIN NutritionFacts AS nf ON nf.id = fi.id " +
             "LEFT JOIN Recommendations AS r ON fi.id = r.foodId " +
             "LEFT JOIN Sports AS s ON s.groupId = r.groupId " +
-//            "WHERE s.id = :sport " +
             "WHERE (s.id = :sport OR r.groupId IS NULL) " +
             "    AND fi.id NOT IN (" +
             "        SELECT foodId FROM Allergens" +

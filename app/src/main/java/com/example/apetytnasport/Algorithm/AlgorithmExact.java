@@ -60,7 +60,6 @@ public class AlgorithmExact extends Algorithm {
         double rhoend = 1.0e-6;
         int iprint = 1;
         int maxfun = 3500;
-//        int maxfun = 1500;
 
         Calcfc calcfc = new Calcfc() {
             @Override

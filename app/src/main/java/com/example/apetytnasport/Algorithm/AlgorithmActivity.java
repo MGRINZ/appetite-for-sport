@@ -201,7 +201,6 @@ public class AlgorithmActivity extends NoStatusBarActivity {
 
             Algorithm algorithm = new AlgorithmExact(newFoodItems, protein, fat, carbohydrate);
             algorithm.start();
-            algorithm.printResults();
 
             newAlgorithmResults.addAll(algorithm.getResults());
             error = algorithm.getError();
